@@ -1,0 +1,14 @@
+<div class="viewer-backdrop" (click)="close()"></div>
+<div class="viewer-content">
+  <button mat-icon-button class="close-btn" (click)="close()" style="z-index: 1002;">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="image-container">
+    <img [src]="data.imageUrl" [style.transform]="'scale(' + zoom + ')'">
+  </div>
+  <div class="zoom-controls">
+    <button mat-mini-fab (click)="zoomOut()"><mat-icon>remove</mat-icon></button>
+    <span>{{ zoom | number: '1.1-1' }}x</span>
+    <button mat-mini-fab (click)="zoomIn()"><mat-icon>add</mat-icon></button>
+  </div>
+</div> 

@@ -1,0 +1,20 @@
+
+.loading-containerAll {
+  margin-bottom: 1.5rem;
+  align-self: center;
+  min-height: calc(100vh - 200px);
+  height: 100%;
+  width: 100%;
+  align-content: center;
+
+  .loading-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    span {
+      margin-left: 1rem;
+    }
+  }
+}

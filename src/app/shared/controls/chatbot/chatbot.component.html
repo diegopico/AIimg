@@ -1,0 +1,174 @@
+@if(visible){
+    <div class="chatbot-wrapper" [ngClass]="{'open': isOpen, 'theme-dark': theme === 'dark'}">
+      <div class="customizerBtn" style="bottom: 10px;">
+        <button mat-fab
+            class="bg-primary text-white"
+            (click)="toggleChatWindow()" >
+            <i-tabler *ngIf="!isOpen" name="messages" class="icon-24 d-flex"></i-tabler>
+            <i-tabler *ngIf="isOpen" name="messages-off" class="icon-24 d-flex"></i-tabler>
+        </button>
+      </div>
+
+      <!-- Ventana del chatbot -->
+      <div class="chatbot-container" [ngClass]="theme" [style.display]="isOpen ? 'flex' : 'none'" >
+        <div class="chat-main">
+          <div class="chat-header">
+            <!--
+            <div class="header-buttons">
+              <button class="header-button active">
+                <i class="icon-chat"></i>
+                <span>chat</span>
+              </button>
+              <button class="header-button">
+                <i class="icon-bots"></i>
+                <span>Bots</span>
+              </button>
+              <button class="header-button">
+                <i class="icon-search"></i>
+                <span>Search</span>
+              </button>
+              <button class="header-button">
+                <i class="icon-read"></i>
+                <span>Read</span>
+              </button>
+              <button class="header-button">
+                <i class="icon-write"></i>
+                <span>Write</span>
+              </button>
+              <div class="more-dropdown">
+                <button class="header-button more">
+                  <span>...More</span>
+                </button>
+              </div>
+            </div>
+            -->
+            Chat on-Line
+          </div>
+
+          <div class="chat-content">
+            <div class="chat-messages" #chatContainer>
+              <div class="user-query-wrapper">
+                <div class="user-query">
+                  {{ lastUserMessage }}
+                  <div class="message-time">{{ currentTime | date:'h:mm a' }}</div>
+                </div>
+              </div>
+              <div *ngFor="let message of messages" class="message-wrapper">
+                <app-chat-message 
+                  [message]="message" 
+                  [userName]="userName" 
+                  [userInitial]="userInitial"
+                  [botInitial]="botInitial"
+                  [botName]="botName"
+                  [primaryColor]="primaryColor"
+                  [showHeaders]="false">
+                </app-chat-message>
+              </div>
+              <div *ngIf="isTyping" class="typing-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chat-footer" *ngIf="isOpen">
+            <!--
+            <div class="skills-section">
+              <button class="skills-button" (click)="onAddSkill()">
+                <i class="icon-plus"></i>
+                <span>Add Skills</span>
+              </button>
+            </div>
+            -->
+            <div class="editor-container">
+              <!--
+              <div class="toolbar-top">
+                <div class="toolbar-left">
+                  <button class="icon-button emoji-button">
+                    <i class="icon-emoji"></i>
+                  </button>
+                  <button class="icon-button">
+                    <i class="icon-book"></i>
+                  </button>
+                  <button class="icon-button">
+                    <i class="icon-link"></i>
+                  </button>
+                  <button class="icon-button">
+                    <i class="icon-scissors"></i>
+                  </button>
+                </div>
+                <div class="toolbar-right">
+                  <button class="icon-button">
+                    <i class="icon-code"></i>
+                  </button>
+                  <button class="icon-button">
+                    <i class="icon-time"></i>
+                  </button>
+                  <div class="model-badge">
+                    <span>GPT-4</span>
+                  </div>
+                </div>
+              </div>
+            -->
+              <div class="input-wrapper">
+                <textarea 
+                  #messageInput
+                  class="message-textarea" 
+                  placeholder="Ask me anything, press '/' for prompt" 
+                  [(ngModel)]="newMessage" 
+                  (keydown)="onKeyPress($event)"
+                  (input)="adjustTextareaHeight($event)"
+                  rows="2"></textarea>
+                <button 
+                  class="send-button" 
+                  [disabled]="!newMessage.trim()" 
+                  (click)="onSendMessage()"
+                  [style.background-color]="primaryColor">
+                  <!--
+                  <i class="icon-send"></i>
+                  -->
+                  <i-tabler  name="send-2" class="icon-20 d-flex"></i-tabler>
+                </button>
+              </div>
+              <!--
+              <div class="toolbar-bottom">
+                <div class="formatting-tools">
+                  <button class="format-button">
+                    <i class="icon-markdown">%</i>
+                  </button>
+                  <button class="format-button">
+                    <i class="icon-mention"></i>
+                  </button>
+                  <button class="format-button">
+                    <i class="icon-mic"></i>
+                  </button>
+                </div>
+                <div class="model-info">
+                  <span class="model-label">GPT-4</span>
+                </div>
+              </div>
+            -->
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-sidebar">
+          <button  mat-icon-button aria-label="lightdark" class="d-flex justify-content-center" >
+            <i-tabler  name="brand-facebook" class="icon-20 d-flex"></i-tabler>
+          </button>
+          <button  mat-icon-button aria-label="lightdark" class="d-flex justify-content-center" >
+            <i-tabler  name="brand-meta" class="icon-20 d-flex"></i-tabler>
+          </button>
+          <button  mat-icon-button aria-label="lightdark" class="d-flex justify-content-center" >
+            <i-tabler  name="brand-twitter" class="icon-20 d-flex"></i-tabler>
+          </button>
+          <button  mat-icon-button aria-label="lightdark" class="d-flex justify-content-center" >
+            <i-tabler  name="brand-whatsapp" class="icon-20 d-flex"></i-tabler>
+          </button>
+
+        </div>
+      </div>
+    </div>
+}

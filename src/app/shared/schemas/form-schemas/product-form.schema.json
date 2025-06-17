@@ -1,0 +1,159 @@
+{
+    "formConfig": {
+        "name": "product-registration",
+        "title": {
+            "create": "Nuevo Producto",
+            "edit": "Editar Producto",
+            "createDescription": "Ingresa los datos del nuevo producto",
+            "editDescription": "Modifica los datos del producto"
+        },
+        "apis": {
+            "get": "/api/products/{id}",
+            "save": "/api/products",
+            "update": "/api/products/{id}"
+        },
+        "layout": {
+            "type": "material-card",
+            "useLoading": true,
+            "globalClasses": {
+                "card": "cardWithShadow",
+                "content": "p-24",
+                "row": "row",
+                "fullWidth": "w-100"
+            }
+        },
+        "fields": [
+            {
+                "name": "productName",
+                "label": "Nombre del Producto",
+                "type": "text",
+                "gridColumn": "col-sm-8",
+                "required": true,
+                "placeholder": "Ingrese el nombre del producto",
+                "validators": {
+                    "required": "El nombre del producto es requerido",
+                    "minLength": {
+                        "value": 3,
+                        "message": "El nombre debe tener al menos 3 caracteres"
+                    }
+                }
+            },
+            {
+                "name": "sku",
+                "label": "SKU",
+                "type": "text",
+                "gridColumn": "col-sm-4",
+                "required": true,
+                "placeholder": "Ingrese el SKU",
+                "validators": {
+                    "required": "El SKU es requerido",
+                    "pattern": {
+                        "value": "[A-Z0-9]+",
+                        "message": "El SKU solo debe contener letras mayúsculas y números"
+                    }
+                }
+            },
+            {
+                "name": "category",
+                "label": "Categoría",
+                "type": "select",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "options": [
+                    {"value": "electronics", "label": "Electrónicos"},
+                    {"value": "clothing", "label": "Ropa"},
+                    {"value": "food", "label": "Alimentos"},
+                    {"value": "books", "label": "Libros"}
+                ],
+                "validators": {
+                    "required": "La categoría es requerida"
+                }
+            },
+            {
+                "name": "price",
+                "label": "Precio",
+                "type": "number",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "placeholder": "0.00",
+                "validators": {
+                    "required": "El precio es requerido",
+                    "min": {
+                        "value": 0,
+                        "message": "El precio debe ser mayor a 0"
+                    }
+                }
+            },
+            {
+                "name": "stock",
+                "label": "Stock",
+                "type": "number",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "placeholder": "0",
+                "validators": {
+                    "required": "El stock es requerido",
+                    "min": {
+                        "value": 0,
+                        "message": "El stock debe ser mayor o igual a 0"
+                    }
+                }
+            },
+            {
+                "name": "description",
+                "label": "Descripción",
+                "type": "textarea",
+                "gridColumn": "col-sm-12",
+                "required": false,
+                "placeholder": "Ingrese una descripción del producto",
+                "rows": 4,
+                "validators": {
+                    "maxLength": {
+                        "value": 500,
+                        "message": "La descripción no debe exceder los 500 caracteres"
+                    }
+                }
+            },
+            {
+                "name": "expirationDate",
+                "label": "Fecha de Vencimiento",
+                "type": "date",
+                "gridColumn": "col-sm-6",
+                "required": false,
+                "placeholder": "Seleccione una fecha"
+            },
+            {
+                "name": "isActive",
+                "label": "Producto Activo",
+                "type": "checkbox",
+                "gridColumn": "col-sm-12",
+                "defaultValue": true
+            }
+        ],
+        "actions": {
+            "alignment": "end",
+            "buttons": [
+                {
+                    "text": "Cancelar",
+                    "type": "button",
+                    "style": "mat-button",
+                    "action": "cancel"
+                },
+                {
+                    "text": {
+                        "create": "Guardar",
+                        "edit": "Actualizar"
+                    },
+                    "type": "submit",
+                    "style": "mat-raised-button",
+                    "color": "primary",
+                    "action": "save"
+                }
+            ]
+        },
+        "navigation": {
+            "cancel": "/products",
+            "success": "/products"
+        }
+    }
+} 

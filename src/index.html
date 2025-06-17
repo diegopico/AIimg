@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>ImgAIS</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- PapaParse para análisis de archivos CSV -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  
+  <!-- Estilos para tablas markdown con resize -->
+  <link rel="stylesheet" href="assets/css/tables.css" type="text/css">
+
+  <!--
+  <link  href="assets/styles/allmaterial-dark.css" id="css-all"   type="text/css" rel="stylesheet"/>
+  -->
+  <!--
+  <link  href="assets/styles/ej2-angular-base/material-dark.css" id="css-base"   type="text/css" rel="stylesheet"/>
+  <link  href="assets/styles/ej2-angular-grids/material-dark.css" id="css-grids" type="text/css" rel="stylesheet"/>
+  <link  href="assets/styles/ej2-navigations/material-dark.css" id="css-navigations" type="text/css" rel="stylesheet"/>
+  -->
+</head>
+<body class="mat-typography">
+  <app-root></app-root>
+
+  <!-- SISTEMA GLOBAL DE RESIZE PARA TABLAS MARKDOWN -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Sistema global de resize para tablas markdown
+    window.TableResizeManager = {
+      isResizing: false,
+      currentColumn: null,
+      nextColumn: null,
+      startX: 0,
+      startWidth: 0,
+      nextStartWidth: 0,
+      currentTable: null,
+      globalListenersInitialized: false,
+      observer: null,
+
+      // Inicializar listeners globales una sola vez
+      initGlobalListeners: function() {
+        if (this.globalListenersInitialized) return;
+        this.globalListenersInitialized = true;
+
+        console.log('🔧 Inicializando sistema global de resize para tablas');
+
+        // Event listener para mousemove global
+        document.addEventListener('mousemove', (e) => {
+          if (!this.isResizing || !this.currentColumn) return;
+          e.preventDefault();
+
+          const deltaX = e.clientX - this.startX;
+          const newWidth = Math.max(80, this.startWidth + deltaX);
+
+          // Resize proporcional con columna siguiente
+          if (this.nextColumn && this.nextStartWidth > 80) {
+            const nextNewWidth = Math.max(80, this.nextStartWidth - deltaX);
+            if (newWidth >= 80 && nextNewWidth >= 80) {
+              this.currentColumn.style.width = newWidth + 'px';
+              this.currentColumn.style.minWidth = newWidth + 'px';
+              this.nextColumn.style.width = nextNewWidth + 'px';
+              this.nextColumn.style.minWidth = nextNewWidth + 'px';
+            }
+          } else {
+            // Solo resize de la columna actual
+            this.currentColumn.style.width = newWidth + 'px';
+            this.currentColumn.style.minWidth = newWidth + 'px';
+          }
+        });
+
+        // Event listener para mouseup global
+        document.addEventListener('mouseup', () => {
+          if (this.isResizing) {
+            this.stopResize();
+          }
+        });
+
+        // Event listener para mouseleave global
+        document.addEventListener('mouseleave', () => {
+          if (this.isResizing) {
+            this.stopResize();
+          }
+        });
+
+        // Observador de mutaciones para detectar nuevas tablas
+        this.initMutationObserver();
+      },
+
+      // Inicializar observador de mutaciones para detectar tablas dinámicas
+      initMutationObserver: function() {
+        this.observer = new MutationObserver((mutations) => {
+          let hasNewTables = false;
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+              mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1) { // Element node
+                  // Buscar tablas en el nodo agregado
+                  const tables = node.querySelectorAll ? 
+                    node.querySelectorAll('.resizable-table:not([data-resize-initialized])') : [];
+                  if (tables.length > 0) {
+                    hasNewTables = true;
+                  }
+                  // Verificar si el nodo mismo es una tabla
+                  if (node.classList && node.classList.contains('resizable-table') && 
+                      !node.hasAttribute('data-resize-initialized')) {
+                    hasNewTables = true;
+                  }
+                }
+              });
+            }
+          });
+
+          if (hasNewTables) {
+            // Pequeño delay para asegurar que el DOM esté completamente renderizado
+            setTimeout(() => this.initAllTables(), 10);
+          }
+        });
+
+        // Observar todo el documento
+        this.observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      },
+
+      // Iniciar resize de una columna
+      startResize: function(handle, e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.isResizing = true;
+        this.currentColumn = handle.parentElement;
+        this.currentTable = this.currentColumn.closest('table');
+        this.startX = e.clientX;
+        this.startWidth = this.currentColumn.offsetWidth;
+
+        // Obtener la siguiente columna para resize proporcional
+        const currentIndex = Array.from(this.currentColumn.parentElement.children).indexOf(this.currentColumn);
+        const nextTh = this.currentColumn.parentElement.children[currentIndex + 1];
+        if (nextTh) {
+          this.nextColumn = nextTh;
+          this.nextStartWidth = nextTh.offsetWidth;
+        } else {
+          this.nextColumn = null;
+          this.nextStartWidth = 0;
+        }
+
+        // Aplicar estilos visuales durante resize
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+        document.body.style.mozUserSelect = 'none';
+        document.body.style.msUserSelect = 'none';
+
+        if (this.currentTable) {
+          this.currentTable.classList.add('resizing');
+          this.currentTable.style.pointerEvents = 'none';
+        }
+
+        // Mantener el handle visible durante resize
+        handle.style.pointerEvents = 'auto';
+        handle.style.opacity = '1';
+        handle.style.backgroundColor = 'rgba(59, 130, 246, 0.3)';
+      },
+
+      // Detener resize
+      stopResize: function() {
+        if (!this.isResizing) return;
+
+        this.isResizing = false;
+
+        // Restaurar estilos del body
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        document.body.style.webkitUserSelect = '';
+        document.body.style.mozUserSelect = '';
+        document.body.style.msUserSelect = '';
+
+        // Restaurar estilos de la tabla
+        if (this.currentTable) {
+          this.currentTable.classList.remove('resizing');
+          this.currentTable.style.pointerEvents = '';
+
+          // Restaurar todos los handles de la tabla
+          const handles = this.currentTable.querySelectorAll('.column-resize-handle');
+          handles.forEach(handle => {
+            handle.style.opacity = '';
+            handle.style.pointerEvents = '';
+            handle.style.backgroundColor = '';
+          });
+        }
+
+        // Limpiar referencias
+        this.currentColumn = null;
+        this.nextColumn = null;
+        this.currentTable = null;
+      },
+
+      // Configurar una tabla específica
+      setupTable: function(table) {
+        if (!table || table.hasAttribute('data-resize-initialized')) return;
+
+        // Marcar como inicializada
+        table.setAttribute('data-resize-initialized', 'true');
+
+        console.log('📏 Configurando resize para tabla:', table.id || 'sin ID');
+
+        // Configurar todos los handles de resize de esta tabla
+        const resizeHandles = table.querySelectorAll('.column-resize-handle');
+        resizeHandles.forEach((handle) => {
+          // Event listener para mousedown
+          handle.addEventListener('mousedown', (e) => {
+            this.startResize(handle, e);
+          });
+
+          // Event listeners para efectos visuales
+          handle.addEventListener('mouseenter', () => {
+            if (!this.isResizing) {
+              handle.style.opacity = '1';
+              handle.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+            }
+          });
+
+          handle.addEventListener('mouseleave', () => {
+            if (!this.isResizing) {
+              handle.style.opacity = '';
+              handle.style.backgroundColor = '';
+            }
+          });
+        });
+
+        // Prevenir selección de texto durante resize
+        table.addEventListener('selectstart', (e) => {
+          if (this.isResizing) {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        // Prevenir drag durante resize
+        table.addEventListener('dragstart', (e) => {
+          if (this.isResizing) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      },
+
+      // Inicializar todas las tablas no inicializadas
+      initAllTables: function() {
+        const tables = document.querySelectorAll('.resizable-table:not([data-resize-initialized])');
+        
+        if (tables.length > 0) {
+          console.log(`🔍 Encontradas ${tables.length} tabla(s) nueva(s) para inicializar`);
+          tables.forEach(table => this.setupTable(table));
+        }
+      },
+
+      // Método público para reinicializar (útil desde Angular)
+      reinitialize: function() {
+        console.log('🔄 Reinicializando sistema de resize');
+        this.initAllTables();
+      },
+
+      // Destruir observador (para limpieza)
+      destroy: function() {
+        if (this.observer) {
+          this.observer.disconnect();
+          this.observer = null;
+        }
+        this.globalListenersInitialized = false;
+      }
+    };
+
+    // Auto-inicialización cuando el DOM esté listo
+    function initializeSystem() {
+      window.TableResizeManager.initGlobalListeners();
+      window.TableResizeManager.initAllTables();
+      console.log('✅ Sistema de resize para tablas inicializado correctamente');
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeSystem);
+    } else {
+      // DOM ya está listo
+      initializeSystem();
+    }
+
+    // Compatibilidad con hot reload de Angular en desarrollo
+    if (typeof module !== 'undefined' && module.hot) {
+      module.hot.accept();
+    }
+
+  })();
+  </script>
+</body>
+</html>

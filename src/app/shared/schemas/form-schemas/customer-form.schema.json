@@ -1,0 +1,155 @@
+{
+    "formConfig": {
+        "name": "customer-registration",
+        "title": {
+            "create": "Nuevo Cliente",
+            "edit": "Editar Cliente",
+            "createDescription": "Ingresa los datos del nuevo cliente",
+            "editDescription": "Modifica los datos del cliente"
+        },
+        "apis": {
+            "get": "/api/customers/{id}",
+            "save": "/api/customers",
+            "update": "/api/customers/{id}"
+        },
+        "layout": {
+            "type": "material-card",
+            "useLoading": true,
+            "globalClasses": {
+                "card": "cardWithShadow",
+                "content": "p-24",
+                "row": "row",
+                "fullWidth": "w-100"
+            }
+        },
+        "fields": [
+            {
+                "name": "firstName",
+                "label": "Nombre",
+                "type": "text",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "placeholder": "Ingrese el nombre",
+                "validators": {
+                    "required": "El nombre es requerido",
+                    "minLength": {
+                        "value": 2,
+                        "message": "El nombre debe tener al menos 2 caracteres"
+                    },
+                    "maxLength": {
+                        "value": 50,
+                        "message": "El nombre no debe exceder los 50 caracteres"
+                    }
+                }
+            },
+            {
+                "name": "lastName",
+                "label": "Apellidos",
+                "type": "text",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "placeholder": "Ingrese los apellidos",
+                "validators": {
+                    "required": "Los apellidos son requeridos",
+                    "minLength": {
+                        "value": 2,
+                        "message": "Los apellidos deben tener al menos 2 caracteres"
+                    }
+                }
+            },
+            {
+                "name": "documentType",
+                "label": "Tipo de Documento",
+                "type": "select",
+                "gridColumn": "col-sm-4",
+                "required": true,
+                "options": [
+                    {"value": "dni", "label": "DNI"},
+                    {"value": "passport", "label": "Pasaporte"},
+                    {"value": "foreignId", "label": "Carné de Extranjería"}
+                ],
+                "validators": {
+                    "required": "El tipo de documento es requerido"
+                }
+            },
+            {
+                "name": "documentNumber",
+                "label": "Número de Documento",
+                "type": "text",
+                "gridColumn": "col-sm-8",
+                "required": true,
+                "placeholder": "Ingrese el número de documento",
+                "validators": {
+                    "required": "El número de documento es requerido",
+                    "pattern": {
+                        "value": "[0-9A-Z]+",
+                        "message": "El número de documento solo debe contener números y letras mayúsculas"
+                    }
+                }
+            },
+            {
+                "name": "birthDate",
+                "label": "Fecha de Nacimiento",
+                "type": "date",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "validators": {
+                    "required": "La fecha de nacimiento es requerida"
+                }
+            },
+            {
+                "name": "email",
+                "label": "Correo Electrónico",
+                "type": "email",
+                "gridColumn": "col-sm-6",
+                "required": true,
+                "placeholder": "ejemplo@correo.com",
+                "validators": {
+                    "required": "El correo electrónico es requerido",
+                    "email": "Ingrese un correo electrónico válido"
+                }
+            },
+            {
+                "name": "address",
+                "label": "Dirección",
+                "type": "textarea",
+                "gridColumn": "col-sm-12",
+                "required": false,
+                "placeholder": "Ingrese la dirección completa",
+                "rows": 3
+            },
+            {
+                "name": "isActive",
+                "label": "Cliente Activo",
+                "type": "checkbox",
+                "gridColumn": "col-sm-12",
+                "defaultValue": true
+            }
+        ],
+        "actions": {
+            "alignment": "end",
+            "buttons": [
+                {
+                    "text": "Cancelar",
+                    "type": "button",
+                    "style": "mat-button",
+                    "action": "cancel"
+                },
+                {
+                    "text": {
+                        "create": "Guardar",
+                        "edit": "Actualizar"
+                    },
+                    "type": "submit",
+                    "style": "mat-raised-button",
+                    "color": "primary",
+                    "action": "save"
+                }
+            ]
+        },
+        "navigation": {
+            "cancel": "/customers",
+            "success": "/customers"
+        }
+    }
+} 

@@ -1,0 +1,159 @@
+<div class="blank-layout-container justify-content-center">
+  <div class="position-relative row w-100 h-100">
+    <div class="col-lg-7 col-xl-8 bg-gredient p-0">
+      <div class="p-24 h-100">
+        <app-branding></app-branding>
+
+        <div class="align-items-center justify-content-center img-height d-none d-lg-flex">
+          <img src="./assets/images/backgrounds/login-bg.svg" alt="login" style="max-width: 500px" />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-xl-4 p-0">
+      <div class="p-32 d-flex align-items-start align-items-lg-center justify-content-center h-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-lg-9 max-width-form">
+            <h4 class="f-w-700 f-s-24 m-0">{{ "Bienvenido" | translate }}</h4>
+            <span class="f-s-14 d-block f-s-14 m-t-8">{{ "tu.administracion" | translate }}</span>
+
+            <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
+
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "firstName.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="firstName" />
+                @if(f['firstName'].touched && f['firstName'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if(f['firstName'].errors && f['firstName'].errors['required']) {
+                  <div class="text-error">{{ "firstName.required" | translate }}</div>
+                  }
+                  @if(f['firstName'].errors && f['firstName'].errors['minlength']) {
+                  <div class="text-error">{{ "firstName.6charact" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "lastName.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="lastName" />
+                @if(f['lastName'].touched && f['lastName'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if(f['lastName'].errors && f['lastName'].errors['required']) {
+                  <div class="text-error">{{ "lastName.required" | translate }}</div>
+                  }
+                  @if(f['lastName'].errors && f['lastName'].errors['minlength']) {
+                  <div class="text-error">{{ "lastName.6charact" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+              <!-- email -->
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "email.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput type="email" formControlName="email" />
+                @if(f['email'].touched && f['email'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if(f['email'].errors && f['email'].errors['required']) {
+                  <div class="text-error">{{ "emailuser.required" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <!-- password -->
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "password.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput type="password" formControlName="password" />
+                @if(f['password'].touched && f['password'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if( f['password'].errors && f['password'].errors['required'])
+                  {
+                  <div class="text-error">{{ "passworduser.required" | translate }}</div>
+                  }
+                  @if(f['password'].errors && f['password'].errors['minlength']) {
+                  <div class="text-error">{{ "password.min6chars" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <!-- confirmPassword -->
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "password.confirm" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput type="password" formControlName="confirmPassword" />
+                @if(f['confirmPassword'].touched && f['confirmPassword'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if( f['confirmPassword'].errors && f['confirmPassword'].errors['required'])
+                  {
+                  <div class="text-error">{{ "passwordConfirm.required" | translate }}</div>
+                  }
+                  @if(f['confirmPassword'].errors && f['confirmPassword'].errors['minlength']) {
+                  <div class="text-error">{{ "password.min6chars" | translate }}</div>
+                  }
+                  @if( f['confirmPassword'].errors && f['confirmPassword'].errors['different'])
+                  {
+                  <div class="text-error">{{ "password.Different" | translate }}</div>
+                  }
+
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <!-- phoneNumber -->
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "phoneNumber.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="phoneNumber" />
+                @if(f['phoneNumber'].touched && f['phoneNumber'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if( f['phoneNumber'].errors && f['phoneNumber'].errors['required'])
+                  {
+                  <div class="text-error">{{ "phoneNumberUser.required" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+
+              </mat-form-field>
+
+              <!-- companyName -->
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "companyName.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="companyName" />
+                @if(f['companyName'].touched && f['companyName'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if( f['companyName'].errors && f['companyName'].errors['required'])
+                  {
+                  <div class="text-error">{{ "companyNameUser.required" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <!-- industry -->
+              <mat-label class="f-s-14 f-w-600 m-b-12 d-block">{{ "industry.user" | translate }}</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="industry" />
+                @if(f['industry'].touched && f['industry'].invalid) {
+                <mat-hint class="m-b-16 error-msg">
+                  @if( f['industry'].errors && f['industry'].errors['required'])
+                  {
+                  <div class="text-error">{{ "industryUser.required" | translate }}</div>
+                  }
+                </mat-hint>
+                }
+              </mat-form-field>
+
+              <button mat-flat-button color="primary" class="w-100" [disabled]="!form.valid">
+                {{ "registrar" | translate }}
+              </button>
+              <!-- input -->
+            </form>
+            <span class="d-block f-w-500 d-block m-t-24">{{ "ya.tienescuenta" | translate }}
+              <a [routerLink]="['/authentication/login']" class="text-decoration-none text-primary f-w-500 f-s-14">
+                {{ "iniciar.sesion" | translate }}</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

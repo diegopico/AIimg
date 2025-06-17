@@ -1,0 +1,210 @@
+<mat-card class="shadow-none">
+  <mat-card-content class="card-form">
+
+    <div class="mode-switch">
+      <button mat-raised-button [color]="selectMode ? 'accent' : 'primary'" (click)="toggleSelectMode()">
+        <mat-icon>{{ selectMode ? 'close' : 'library_add' }}</mat-icon>
+        {{ selectMode ? ('upload-file-prod.exitSelectionMode' | translate) : ('upload-file-prod.multiSelectMode' |
+        translate) }}
+      </button>
+
+      <div>
+        <div class="select-actions" *ngIf="selectMode">
+          <button mat-button (click)="toggleSelectAllProducts()" *ngIf="totalProducts > pageSize">
+            {{ allSelected ? ('upload-file-prod.deselectAllProducts' | translate) :
+            ('upload-file-prod.selectAllProducts' | translate) }}
+          </button>
+        </div>
+      </div>
+      <span class="mode-label" *ngIf="selectMode">
+        <span class="selection-count" *ngIf="selectedProducts.length > 0">
+          {{ selectedProducts.length }} {{ 'upload-file-prod.productsSelected' | translate }}
+        </span>
+      </span>
+
+
+    </div>
+
+    <div class="demo-layout">
+      <!-- Product List Sidebar -->
+      <div class="product-list-container">
+        <mat-card>
+          <!-- Buscador -->
+          <div class="search-container" style="padding: 15px;">
+
+            <mat-form-field appearance="outline" class="w-100 hide-hint">
+              <input matInput placeholder="{{ 'upload-file-prod.searchProducts' | translate }}" [(ngModel)]="searchTerm"
+                (keyup.enter)="search()" />
+              <mat-icon matSuffix>
+                <i-tabler name="search" class="icon-20 d-flex m-t-2"></i-tabler>
+              </mat-icon>
+            </mat-form-field>
+
+          </div>
+
+          <mat-card-content>
+            <!-- Loading Spinner -->
+            <div class="loading-spinner-container" *ngIf="isLoading">
+              <mat-spinner diameter="20"></mat-spinner>
+            </div>
+
+            <!-- Lista de productos -->
+            <div [class.hidden]="isLoading">
+              <mat-list style="max-height: 600px; overflow-y: auto;">
+                <mat-list-item *ngFor="let product of products" (click)="selectProduct(product)"
+                  [class.selected]="selectedProduct?.Code === product.Code || product.selected">
+
+                  <div class="product-item-container b-b-1">
+                    <div class="icon-checkbox-container">
+                      <!--
+                      <mat-icon class="product-icon">shopping_bag</mat-icon>
+                      -->
+                      <i-tabler name="shopping-bag-minus" class="icon-20 d-flex m-t-2"></i-tabler>
+                      <div *ngIf="selectMode" class="select-checkbox">
+                        <mat-checkbox [checked]="product.selected" (click)="$event.stopPropagation()"
+                          (change)="toggleProductSelection(product)">
+                        </mat-checkbox>
+                      </div>
+                      <div *ngIf="!selectMode" style="height: 44px;">
+                      </div>
+                    </div>
+
+                    <div class="product-details">
+                      <div class="product-name">{{ convertToTitleCase(product.Name)}}</div>
+                      <div class="product-info">
+                        Codigo:{{ product.Code }} - {{ product.Categoria }} - ${{ product.Price1U }}
+                      </div>
+                    </div>
+
+                    <div *ngIf="product.images && product.images.length > 0" class="image-badge">
+                      <mat-icon [matBadge]="product.images.length" matBadgeColor="accent">photo_library</mat-icon>
+                    </div>
+                  </div>
+                </mat-list-item>
+              </mat-list>
+
+              <!-- Mensaje de sin resultados -->
+              <div *ngIf="products.length === 0" class="no-results">
+                <p>{{ 'upload-file-prod.noProductsFound' | translate }}</p>
+              </div>
+              <!-- Paginador -->
+              <mat-paginator [length]="totalProducts"  [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                [pageIndex]="currentPage" (page)="handlePageEvent($event)" aria-label="Select page">
+              </mat-paginator>
+
+            </div>
+
+
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="main-content">
+        <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+          <!-- Product Images Tab -->
+          <mat-tab label="{{ 'upload-file-prod.productImages' | translate }}"
+            [disabled]="selectMode || !selectedProduct">
+            <div class="tab-content" *ngIf="selectedProduct">
+              <div class="product-header">
+                <div class="row">
+                  <div class="col-md-5">
+                    <h4 style="font-size: 12px;">{{ convertToTitleCase(selectedProduct.Name) }}</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="product-info" style="font-size: 11px;">
+                      {{ 'Categoria' | translate }} {{ selectedProduct.Categoria }} |
+                      {{ 'Price1U' | translate }} ${{ selectedProduct.Price1U }} |
+                      {{ 'Stock' | translate }} {{ selectedProduct.Stock }}
+                    </div>
+                  </div>
+                </div>
+                <div class="product-info" style="font-size: 12px; margin-top: 10px;">
+                  {{ selectedProduct.Description }}
+                </div>
+              </div>
+
+              <!-- Loading indicator -->
+              <div class="loading-container" *ngIf="loadingImages">
+                <mat-card>
+                  <mat-card-content>
+                    <div class="loading-spinner2"></div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+
+              <div class="upload-section" *ngIf="!loadingImages">
+                <app-upload-file [apiLogical]="apiLogical" [apiFisical]="apiFisical" [entityId]="selectedProduct.Code" [maxFileSize]="5"  (imageUploaded)="onImageUploaded($event)"
+
+                  [allowedTypes]="['image/jpeg', 'image/png', 'image/gif']">
+                </app-upload-file>
+              </div>
+            </div>
+
+            <div class="no-product-selected" *ngIf="!selectedProduct">
+              <p>{{ 'upload-file-prod.selectProduct' | translate }}</p>
+            </div>
+          </mat-tab>
+
+          <!-- Multiple Products Images Tab -->
+          <mat-tab label="{{ 'upload-file-prod.bulkImageUpload' | translate }}" [disabled]="!selectMode">
+            <div class="tab-content">
+              <div class="bulk-upload-header">
+                <div class="row">
+                  <div class="col-md-5">
+                    <h4>{{ 'upload-file-prod.bulkImageUpload' | translate }}</h4>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="product-info" style="font-size: 11px;">
+                    </div>
+                  </div>
+                </div>
+
+                <p class="upload-info">
+                  {{ 'upload-file-prod.uploadImagesInfo' | translate }}
+                </p>
+              </div>
+
+              <div class="selected-products-list">
+                <h3>{{ 'upload-file-prod.selectedProducts' | translate }} ({{ selectedProducts.length }})</h3>
+
+                <div class="product-chips">
+                  <div class="mat-chip-grid">
+                    <div *ngFor="let product of selectedProducts" class="custom-chip">
+                      <span>{{ convertToTitleCase(product.Name) }}</span>
+                      <button class="remove-btn" (click)="removeProductSelection(product)">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Loading indicator -->
+              <div class="loading-container" *ngIf="loadingImages">
+                <mat-card>
+                  <mat-card-content>
+                    <div class="loading-spinner">
+                      <mat-icon class="rotating">refresh</mat-icon>
+                      <p>Processing images for {{ selectedProducts.length }} products...</p>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+
+              <div class="upload-section" *ngIf="!loadingImages && selectedProducts.length > 0">
+                <h3>{{ 'upload-file-prod.uploadImagesFor' | translate }} {{ selectedProducts.length }} {{
+                  'upload-file-prod.products' | translate }}</h3>
+
+                <app-upload-file [apiLogical]="apiLogical" [apiFisical]="apiFisical" [productIds]="selectedProductCodes" [maxFileSize]="5"
+                  [allowedTypes]="['image/jpeg', 'image/png', 'image/gif']">
+                </app-upload-file>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

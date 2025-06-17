@@ -1,0 +1,112 @@
+<!--------------Header----------------->
+<mat-toolbar class="topbar topbar-xl m-auto" style="min-height: 70px;">
+	<div class="container full-width p-xs-6">
+		<!-- Primera fila: Logo y controles básicos -->
+		<div class="d-flex align-items-center w-100">
+			<div class="branding p-x-0">
+				<app-branding></app-branding>
+			</div>
+			<span class="flex-1-auto"></span>
+
+			<!-- Botones de navegación - Solo visible en desktop -->
+			<div class="d-none d-lg-flex">
+				<a mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="[{ outlets: { go: ['start'] } }]">{{ "Inicio" |
+					translate }}</a>
+
+				<a mat-flat-button color="primary" class="m-l-10" [routerLink]="[{ outlets: { go: ['login'] } }]">
+					{{"iniciar.sesion" | translate }}
+				</a>
+			</div>
+
+			<!-- Controles siempre visibles: idioma y tema -->
+			<div class="d-flex align-items-center">
+				<!-- Menú hamburguesa - Solo visible en móvil -->
+				<button mat-icon-button class="d-lg-none m-r-8" [matMenuTriggerFor]="mobileMenu"
+					aria-label="Mobile Menu">
+					<i-tabler class="d-flex icon-22" name="menu-2"></i-tabler>
+				</button>
+
+				<!-- Menú móvil con mat-menu -->
+				<mat-menu #mobileMenu="matMenu" class="b-1 mobile-dropdown cardWithShadow">
+					<div class="mobile-menu-header p-x-24 p-y-16">
+						<h6 class="f-s-16 f-w-600 m-0">{{ "Menu" | translate }}</h6>
+					</div>
+
+					<!-- Navegación móvil -->
+					<div class="p-x-24">
+						<a mat-menu-item class="mobile-nav-item" [routerLink]="[{ outlets: { go: ['start'] } }]">
+							<div class="d-flex align-items-center">
+								<i-tabler name="home" class="icon-20 m-r-12"></i-tabler>
+								<span>{{ "Inicio" | translate }}</span>
+							</div>
+						</a>
+
+						<a mat-menu-item class="mobile-nav-item" href="#">
+							<div class="d-flex align-items-center">
+								<i-tabler name="device-desktop" class="icon-20 m-r-12"></i-tabler>
+								<span>{{ "Demo" | translate }}</span>
+							</div>
+						</a>
+
+						<a mat-menu-item class="mobile-nav-item" href="#">
+							<div class="d-flex align-items-center">
+								<i-tabler name="puzzle" class="icon-20 m-r-12"></i-tabler>
+								<span>{{ "Soluciones" | translate }}</span>
+							</div>
+						</a>
+
+						<a mat-menu-item class="mobile-nav-item" href="#">
+							<div class="d-flex align-items-center">
+								<i-tabler name="currency-dollar" class="icon-20 m-r-12"></i-tabler>
+								<span>{{ "Precios" | translate }}</span>
+							</div>
+						</a>
+					</div>
+
+					<!-- Separador -->
+					<mat-divider class="m-y-8"></mat-divider>
+
+					<!-- Botones de acción -->
+					<div class="p-x-24 p-b-16">
+						<a mat-flat-button color="primary" class="w-100 m-b-8"
+							[routerLink]="[{ outlets: { go: ['login'] } }]">
+							{{ "iniciar.sesion" | translate }}
+						</a>
+						<a mat-flat-button color="accent" class="w-100"
+							[routerLink]="[{ outlets: { go: ['register-demo'] } }]">
+							{{ "registrar" | translate }}
+						</a>
+					</div>
+				</mat-menu>
+
+				<!-- Selector de idioma -->
+				<button [matMenuTriggerFor]="flags" mat-icon-button class="m-r-5">
+					<img [src]="selectedLanguage.icon" class="rounded-circle object-cover icon-20" />
+				</button>
+				<mat-menu #flags="matMenu" class="cardWithShadow">
+					@for(lang of languages; track lang.id) {
+					<button mat-menu-item (click)="changeLanguage(lang)">
+						<div class="d-flex align-items-center">
+							<img [src]="lang.icon" class="rounded-circle object-cover m-r-8 icon-20" />
+							<span class=" f-s-14">{{ lang.language }}</span>
+						</div>
+					</button>
+					}
+				</mat-menu>
+
+				<!-- Toggle tema -->
+				@if(options.theme=='light'){
+				<button mat-icon-button aria-label="lightdark" class="d-flex justify-content-center"
+					(click)="setlightDark('dark')">
+					<i-tabler class="d-flex icon-22" [name]="'moon'"></i-tabler>
+				</button>
+				}@else{
+				<button mat-icon-button aria-label="lightdark" class="d-flex justify-content-center"
+					(click)="setlightDark('light')">
+					<i-tabler class="d-flex icon-22" [name]="'sun'"></i-tabler>
+				</button>
+				}
+			</div>
+		</div>
+	</div>
+</mat-toolbar>

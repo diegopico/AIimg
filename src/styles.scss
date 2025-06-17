@@ -1,0 +1,1077 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+.light {
+    @import 'node_modules/@syncfusion/ej2-base/styles/material.css';
+    @import 'node_modules/@syncfusion/ej2-angular-base/styles/material.css';
+    @import 'node_modules/@syncfusion/ej2-angular-grids/styles/material.css';
+    @import 'node_modules/@syncfusion/ej2-navigations/styles/material.css';
+}
+.dark {
+    @import 'node_modules/@syncfusion/ej2-base/styles/material-dark.css';
+    @import 'node_modules/@syncfusion/ej2-angular-base/styles/material-dark.css';
+    @import 'node_modules/@syncfusion/ej2-angular-grids/styles/material-dark.css';
+    @import 'node_modules/@syncfusion/ej2-navigations/styles/material-dark.css';
+}
+*/
+
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Estilos personalizados para scrollbar */
+/* Afecta a todos los scrollbars en la aplicación */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.icon-mat {
+  display: inline-block !important;;
+  width: 24px !important;
+  height: 24px !important;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+:root {
+  --color-primario: #3498db;
+  --color-secundario: #2ecc71;
+  --color-basic-01: #328137;
+  --color-basic-02: #1565c0;
+  --color-new: #e4ecee;
+  --color-edit: #849fa7;
+  --color-delete: #af7c64;
+
+  /* Variables para tablas markdown */
+  --md-table-bg: rgba(255, 255, 255, 0.95);
+  --md-table-border: rgba(0, 0, 0, 0.08);
+  --md-table-shadow: rgba(0, 0, 0, 0.1);
+  --md-table-header-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --md-table-header-text: #334155;
+  --md-table-text: #475569;
+  --md-table-numeric: #0ea5e9;
+  --md-table-hover: rgba(59, 130, 246, 0.08);
+  --md-table-stripe-odd: rgba(248, 250, 252, 0.8);
+  --md-table-stripe-even: rgba(241, 245, 249, 0.6);
+
+  /* --espaciado-base: 16px; */
+  /* --fuente-principal: 'Arial', sans-serif; */
+  /* ========== GRISES NEUTROS (20 tonalidades) ========== */
+  --icon-neutral-25: #fefefe;
+  --icon-neutral-50: #fafafa;
+  --icon-neutral-75: #f7f7f7;
+  --icon-neutral-100: #f5f5f5;
+  --icon-neutral-150: #f0f0f0;
+  --icon-neutral-200: #eeeeee;
+  --icon-neutral-250: #e7e7e7;
+  --icon-neutral-300: #e0e0e0;
+  --icon-neutral-350: #d1d1d1;
+  --icon-neutral-400: #bdbdbd;
+  --icon-neutral-450: #aeaeae;
+  --icon-neutral-500: #9e9e9e;
+  --icon-neutral-550: #8a8a8a;
+  --icon-neutral-600: #757575;
+  --icon-neutral-650: #696969;
+  --icon-neutral-700: #616161;
+  --icon-neutral-750: #525252;
+  --icon-neutral-800: #424242;
+  --icon-neutral-850: #323232;
+  --icon-neutral-900: #212121;
+  
+  /* ========== AZULES (20 tonalidades) ========== */
+  --icon-blue-25: #f4faff;
+  --icon-blue-50: #e3f2fd;
+  --icon-blue-75: #d2eafc;
+  --icon-blue-100: #bbdefb;
+  --icon-blue-150: #a6d4fa;
+  --icon-blue-200: #90caf9;
+  --icon-blue-250: #7abff8;
+  --icon-blue-300: #64b5f6;
+  --icon-blue-350: #53adf6;
+  --icon-blue-400: #42a5f5;
+  --icon-blue-450: #329ef4;
+  --icon-blue-500: #2196f3;
+  --icon-blue-550: #1f8ee9;
+  --icon-blue-600: #1e88e5;
+  --icon-blue-650: #1b7fdb;
+  --icon-blue-700: #1976d2;
+  --icon-blue-750: #176dc6;
+  --icon-blue-800: #1565c0;
+  --icon-blue-850: #1258ae;
+  --icon-blue-900: #0d47a1;
+  
+  /* ========== VERDES (20 tonalidades) ========== */
+  --icon-green-25: #f4fbf4;
+  --icon-green-50: #e8f5e9;
+  --icon-green-75: #dbefdc;
+  --icon-green-100: #c8e6c9;
+  --icon-green-150: #b6deb8;
+  --icon-green-200: #a5d6a7;
+  --icon-green-250: #94cf96;
+  --icon-green-300: #81c784;
+  --icon-green-350: #74bf77;
+  --icon-green-400: #66bb6a;
+  --icon-green-450: #59b45d;
+  --icon-green-500: #4caf50;
+  --icon-green-550: #45a849;
+  --icon-green-600: #43a047;
+  --icon-green-650: #3d9142;
+  --icon-green-700: #388e3c;
+  --icon-green-750: #328137;
+  --icon-green-800: #2e7d32;
+  --icon-green-850: #256b29;
+  --icon-green-900: #1b5e20;
+  
+  /* ========== ROJOS (20 tonalidades) ========== */
+  --icon-red-25: #fff5f5;
+  --icon-red-50: #ffebee;
+  --icon-red-75: #ffdde0;
+  --icon-red-100: #ffcdd2;
+  --icon-red-150: #ffb8bf;
+  --icon-red-200: #ef9a9a;
+  --icon-red-250: #ea8589;
+  --icon-red-300: #e57373;
+  --icon-red-350: #ef6664;
+  --icon-red-400: #ef5350;
+  --icon-red-450: #f44942;
+  --icon-red-500: #f44336;
+  --icon-red-550: #e53c35;
+  --icon-red-600: #e53935;
+  --icon-red-650: #dd3331;
+  --icon-red-700: #d32f2f;
+  --icon-red-750: #ca2c2c;
+  --icon-red-800: #c62828;
+  --icon-red-850: #bd2121;
+  --icon-red-900: #b71c1c;
+  
+  /* ========== AMARILLOS (20 tonalidades) ========== */
+  --icon-yellow-25: #fffef5;
+  --icon-yellow-50: #fffde7;
+  --icon-yellow-75: #fffbd5;
+  --icon-yellow-100: #fff9c4;
+  --icon-yellow-150: #fff7b0;
+  --icon-yellow-200: #fff59d;
+  --icon-yellow-250: #fff389;
+  --icon-yellow-300: #fff176;
+  --icon-yellow-350: #ffef62;
+  --icon-yellow-400: #ffee58;
+  --icon-yellow-450: #ffec49;
+  --icon-yellow-500: #ffeb3b;
+  --icon-yellow-550: #ffe638;
+  --icon-yellow-600: #fdd835;
+  --icon-yellow-650: #fcd12f;
+  --icon-yellow-700: #fbc02d;
+  --icon-yellow-750: #faba29;
+  --icon-yellow-800: #f9a825;
+  --icon-yellow-850: #f79920;
+  --icon-yellow-900: #f57f17;
+  
+  /* ========== NARANJAS (20 tonalidades) ========== */
+  --icon-orange-25: #fffaf5;
+  --icon-orange-50: #fff3e0;
+  --icon-orange-75: #ffead0;
+  --icon-orange-100: #ffe0b2;
+  --icon-orange-150: #ffd699;
+  --icon-orange-200: #ffcc80;
+  --icon-orange-250: #ffc166;
+  --icon-orange-300: #ffb74d;
+  --icon-orange-350: #ffae38;
+  --icon-orange-400: #ffa726;
+  --icon-orange-450: #ffa013;
+  --icon-orange-500: #ff9800;
+  --icon-orange-550: #fa9100;
+  --icon-orange-600: #fb8c00;
+  --icon-orange-650: #f88300;
+  --icon-orange-700: #f57c00;
+  --icon-orange-750: #ef7500;
+  --icon-orange-800: #ef6c00;
+  --icon-orange-850: #e56200;
+  --icon-orange-900: #e65100;
+  
+  /* ========== MORADOS (20 tonalidades) ========== */
+  --icon-purple-25: #faf5fd;
+  --icon-purple-50: #f3e5f5;
+  --icon-purple-75: #ead6ee;
+  --icon-purple-100: #e1bee7;
+  --icon-purple-150: #d8addf;
+  --icon-purple-200: #ce93d8;
+  --icon-purple-250: #c57dd1;
+  --icon-purple-300: #ba68c8;
+  --icon-purple-350: #b359c3;
+  --icon-purple-400: #ab47bc;
+  --icon-purple-450: #a439b6;
+  --icon-purple-500: #9c27b0;
+  --icon-purple-550: #9525aa;
+  --icon-purple-600: #8e24aa;
+  --icon-purple-650: #842299;
+  --icon-purple-700: #7b1fa2;
+  --icon-purple-750: #731d9b;
+  --icon-purple-800: #6a1b9a;
+  --icon-purple-850: #5e1992;
+  --icon-purple-900: #4a148c;
+  
+  /* ========== CIANES (20 tonalidades) ========== */
+  --icon-cyan-25: #f0fbfd;
+  --icon-cyan-50: #e0f7fa;
+  --icon-cyan-75: #d0f1f6;
+  --icon-cyan-100: #b2ebf2;
+  --icon-cyan-150: #9ae5ee;
+  --icon-cyan-200: #80deea;
+  --icon-cyan-250: #67d7e6;
+  --icon-cyan-300: #4dd0e1;
+  --icon-cyan-350: #3acbdd;
+  --icon-cyan-400: #26c6da;
+  --icon-cyan-450: #13c1d7;
+  --icon-cyan-500: #00bcd4;
+  --icon-cyan-550: #00b4cb;
+  --icon-cyan-600: #00acc1;
+  --icon-cyan-650: #00a2b7;
+  --icon-cyan-700: #0097a7;
+  --icon-cyan-750: #008e9b;
+  --icon-cyan-800: #00838f;
+  --icon-cyan-850: #007783;
+  --icon-cyan-900: #006064;
+  
+  /* ========== ROSAS (20 tonalidades) ========== */
+  --icon-pink-25: #fef4f7;
+  --icon-pink-50: #fce4ec;
+  --icon-pink-75: #fad4de;
+  --icon-pink-100: #f8bbd0;
+  --icon-pink-150: #f6a6c1;
+  --icon-pink-200: #f48fb1;
+  --icon-pink-250: #f279a1;
+  --icon-pink-300: #f06292;
+  --icon-pink-350: #ee4f86;
+  --icon-pink-400: #ec407a;
+  --icon-pink-450: #ea306e;
+  --icon-pink-500: #e91e63;
+  --icon-pink-550: #d81c60;
+  --icon-pink-600: #d81b60;
+  --icon-pink-650: #ca195b;
+  --icon-pink-700: #c2185b;
+  --icon-pink-750: #b41756;
+  --icon-pink-800: #ad1457;
+  --icon-pink-850: #9b1252;
+  --icon-pink-900: #880e4f;
+  
+  /* ========== VERDES TEAL (20 tonalidades) ========== */
+  --icon-teal-25: #f0f9f8;
+  --icon-teal-50: #e0f2f1;
+  --icon-teal-75: #d0ecea;
+  --icon-teal-100: #b2dfdb;
+  --icon-teal-150: #9bd5cf;
+  --icon-teal-200: #80cbc4;
+  --icon-teal-250: #69c2b9;
+  --icon-teal-300: #4db6ac;
+  --icon-teal-350: #3aaea3;
+  --icon-teal-400: #26a69a;
+  --icon-teal-450: #139e91;
+  --icon-teal-500: #009688;
+  --icon-teal-550: #008f81;
+  --icon-teal-600: #00897b;
+  --icon-teal-650: #008273;
+  --icon-teal-700: #00796b;
+  --icon-teal-750: #007064;
+  --icon-teal-800: #00695c;
+  --icon-teal-850: #005c50;
+  --icon-teal-900: #004d40;
+  
+  /* ========== VERDES LIMA (20 tonalidades) ========== */
+  --icon-lime-25: #f9fbef;
+  --icon-lime-50: #f0f4e0;
+  --icon-lime-75: #e8efcc;
+  --icon-lime-100: #e6ee9c;
+  --icon-lime-150: #dce786;
+  --icon-lime-200: #dce775;
+  --icon-lime-250: #d4e157;
+  --icon-lime-300: #c0ca33;
+  --icon-lime-350: #afb42b;
+  --icon-lime-400: #9e9d24;
+  --icon-lime-450: #8d8f1c;
+  --icon-lime-500: #827717;
+  --icon-lime-550: #787115;
+  --icon-lime-600: #6f6d13;
+  --icon-lime-650: #666a11;
+  --icon-lime-700: #5c660f;
+  --icon-lime-750: #53600d;
+  --icon-lime-800: #4b5c0b;
+  --icon-lime-850: #43570a;
+  --icon-lime-900: #3b5208;
+  
+  /* ========== MARRONES (20 tonalidades) ========== */
+  --icon-brown-25: #f9f5f1;
+  --icon-brown-50: #efebe9;
+  --icon-brown-75: #e5dcd7;
+  --icon-brown-100: #d7ccc8;
+  --icon-brown-150: #c9bcb6;
+  --icon-brown-200: #bcaaa4;
+  --icon-brown-250: #ad9b93;
+  --icon-brown-300: #a1887f;
+  --icon-brown-350: #947a6f;
+  --icon-brown-400: #8d6e63;
+  --icon-brown-450: #836258;
+  --icon-brown-500: #795548;
+  --icon-brown-550: #704c3f;
+  --icon-brown-600: #6d4c41;
+  --icon-brown-650: #644339;
+  --icon-brown-700: #5d4037;
+  --icon-brown-750: #543a31;
+  --icon-brown-800: #4e342e;
+  --icon-brown-850: #472d27;
+  --icon-brown-900: #3e2723;
+  
+  /* ========== PÚRPURA PROFUNDO (20 tonalidades) ========== */
+  --icon-deep-purple-25: #f5f3fa;
+  --icon-deep-purple-50: #ede7f6;
+  --icon-deep-purple-75: #e1d8f0;
+  --icon-deep-purple-100: #d1c4e9;
+  --icon-deep-purple-150: #c1b5de;
+  --icon-deep-purple-200: #b39ddb;
+  --icon-deep-purple-250: #a58ad8;
+  --icon-deep-purple-300: #9575cd;
+  --icon-deep-purple-350: #8465c6;
+  --icon-deep-purple-400: #7e57c2;
+  --icon-deep-purple-450: #7349bc;
+  --icon-deep-purple-500: #673ab7;
+  --icon-deep-purple-550: #6034ab;
+  --icon-deep-purple-600: #5e35b1;
+  --icon-deep-purple-650: #572fa5;
+  --icon-deep-purple-700: #512da8;
+  --icon-deep-purple-750: #4a2799;
+  --icon-deep-purple-800: #4527a0;
+  --icon-deep-purple-850: #3d2291;
+  --icon-deep-purple-900: #311b92;
+  
+  /* ========== AZUL ÍNDIGO (20 tonalidades) ========== */
+  --icon-indigo-25: #f3f5fb;
+  --icon-indigo-50: #e8eaf6;
+  --icon-indigo-75: #dde0f2;
+  --icon-indigo-100: #c5cae9;
+  --icon-indigo-150: #aeb6e0;
+  --icon-indigo-200: #9fa8da;
+  --icon-indigo-250: #919bd5;
+  --icon-indigo-300: #7986cb;
+  --icon-indigo-350: #6776c5;
+  --icon-indigo-400: #5c6bc0;
+  --icon-indigo-450: #505fb9;
+  --icon-indigo-500: #3f51b5;
+  --icon-indigo-550: #3949aa;
+  --icon-indigo-600: #3949ab;
+  --icon-indigo-650: #33419f;
+  --icon-indigo-700: #303f9f;
+  --icon-indigo-750: #2c3993;
+  --icon-indigo-800: #283593;
+  --icon-indigo-850: #232f86;
+  --icon-indigo-900: #1a237e;
+
+ 
+}
+
+/* Estilos específicos para textarea */
+textarea {
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: #888 #f1f1f1; /* Para Firefox */
+}
+
+/* Estilos específicos para mat-select panel */
+.mat-mdc-select-panel::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.mat-mdc-select-panel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.mat-mdc-select-panel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.mat-mdc-select-panel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Asegurarse de que el SVG tenga las dimensiones correctas */
+.mat-mdc-select-arrow svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Para temas oscuros */
+.dark-theme ::-webkit-scrollbar-track {
+  background: #333;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.dark-theme textarea {
+  scrollbar-color: #666 #333; /* Para Firefox en tema oscuro */
+}
+
+/* Variables para tema oscuro en tablas markdown */
+.dark-theme {
+  --md-table-bg: rgba(30, 41, 59, 0.95);
+  --md-table-border: rgba(255, 255, 255, 0.1);
+  --md-table-shadow: rgba(0, 0, 0, 0.3);
+  --md-table-header-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  --md-table-header-text: #e2e8f0;
+  --md-table-text: #cbd5e1;
+  --md-table-numeric: #38bdf8;
+  --md-table-hover: rgba(59, 130, 246, 0.15);
+  --md-table-stripe-odd: rgba(51, 65, 85, 0.4);
+  --md-table-stripe-even: rgba(71, 85, 105, 0.3);
+}
+
+/* Estilos para el diálogo con clase CssModal */
+.CssModal {
+  /* Estilos generales del panel */
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.CssModal .mdc-dialog__container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Control del espacio superior del diálogo */
+.mat-mdc-dialog-container.CssModal .mdc-dialog__container {
+  align-items: flex-start !important;
+  padding-top: 0 !important; /* Ajusta este valor según necesites */
+}
+
+/* Ajuste para reducir el espacio encima del título */
+.CssModal h2.mat-mdc-dialog-title, 
+.CssModal h2 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 8px !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+}
+
+.CssModal .mat-mdc-dialog-content {
+  padding: 8px !important;
+  height: auto !important;
+  max-height: 100vh !important;
+  //overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+}
+
+.CssModal .mat-mdc-form-field {
+  /*height: 325px !important;*/
+  width: 100% !important;
+}
+
+.CssModal textarea {
+  //height: 300px !important;*/
+  overflow-y: auto !important;
+}
+
+.CssModal .mat-mdc-dialog-actions {
+  padding: 8px !important;
+  margin-bottom: 0 !important;
+  min-height: auto !important;
+}
+.CssModal .mat-mdc-dialog-title::before {
+  display: inline-block;
+  width: 0;
+  height: 20px;
+  content: "";
+  vertical-align: 0;
+}
+.CssModal  .mat-mdc-dialog-surface {
+  /* background-color: #fffefe; */
+  border-style: solid;
+  border-width: 0.1px;
+  border-color: #2e3f50;
+}
+
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content:center;
+  align-items: end;
+  z-index: 10;
+}
+
+.loading-container .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color:blue;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.CssModalwait .mat-mdc-dialog-surface{
+  border-radius: 2px;
+  box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.2), 0 2px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 6px 4px rgba(0, 0, 0, 0.12);
+  /* color: rgba(0,0,0,.87); */
+  background-color:#4c739e ;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 0px;
+  /* padding-top: 0px; */
+  /* margin-top: -2px; */
+  /*display: block;*/
+  box-sizing: border-box;
+  /* overflow: auto; */
+  outline: 0;
+  /* max-width: 100vw; */
+  /* height: 100%; */
+  min-height: inherit;
+  max-height: inherit;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 8px;
+  overflow: hidden;
+  /* border: groove; */
+  /* border-style: solid; */
+  /* border-width: 1px; */
+  /* border-color:#1f2b36 */
+}
+
+
+/*--------------------------------------*/
+/*-----------Paginado de Card-----------*/
+/* Estilos base */
+.card-container {
+  padding: 1px !important;
+  min-height: 100vh;
+  padding-top: 3px;
+  
+  /* Padding para escritorio (pantallas de 768px en adelante) */
+  @media (min-width: 768px) {
+    padding: 20px !important;
+  }
+}
+
+/* Contenedor de la lista */
+.card-container .card-list-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Tarjeta de producto */
+.card-container .data-card {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 16px);
+  margin-bottom: 3px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-container .data-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+/* Responsive */
+@media screen and (max-width: 1200px) {
+  .card-container .data-card {
+    width: calc(50% - 16px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-container {
+    padding: 1px;
+    min-height: 100vh;
+    padding-top: 3px;
+  }
+  
+  .card-container .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .card-container .card-header .theme-toggle {
+    align-self: flex-end;
+  }
+  
+  .card-container .data-card {
+    width: 100%;
+  }
+}
+.textoPuntitos {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.efecto-color-title {
+  background: linear-gradient(90deg, #9d46ff, #00e5ff);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+}
+
+.card-form {
+  padding: 5px !important;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-bottom: 20px;
+  /* Padding para escritorio (pantallas de 768px en adelante) */
+  @media (min-width: 768px) {
+    padding: 20px !important;
+  }
+  
+}
+
+.mat-horizontal-content-container {
+    overflow: hidden;
+    padding: 0 5px 5px 5px !important; 
+    @media (min-width: 768px) {
+    padding: 0 20px 20px 20px !important; 
+  }
+}
+
+/* ========== ESTILOS PARA COMPONENTES DE ALERTA ========== */
+/* Alertas generales */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  position: relative;
+  margin-bottom: 16px;
+  font-family: 'Roboto', sans-serif;
+  max-width: 600px; /* Limitar el ancho máximo */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alert-danger {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #c62828;
+  border-color: rgba(244, 67, 54, 0.2);
+  border-left: 4px solid #d32f2f; /* Borde izquierdo más prominente */
+}
+
+.alert-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #2e7d32;
+  border-color: rgba(76, 175, 80, 0.2);
+  border-left: 4px solid #388e3c;
+}
+
+.alert-info {
+  background-color: rgba(33, 150, 243, 0.1);
+  color: #1565c0;
+  border-color: rgba(33, 150, 243, 0.2);
+  border-left: 4px solid #1976d2;
+}
+
+.alert-warning {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ef6c00;
+  border-color: rgba(255, 152, 0, 0.2);
+  border-left: 4px solid #f57c00;
+}
+
+/* Estilos para errores con iconos */
+.error-message {
+  display: flex;
+  align-items: flex-start; /* Cambiar a flex-start para mejor alineación */
+  margin-bottom: 4px;
+  padding: 4px 0;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  .error-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    margin-top: 1px; /* Pequeño ajuste vertical */
+    flex-shrink: 0;
+    color: inherit;
+  }
+}
+
+/* ========== CLASES UTILITARIAS ========== */
+/* Espaciado */
+.m-b-16 { margin-bottom: 16px; }
+.m-t-8 { margin-top: 8px; }
+.m-t-16 { margin-top: 16px; }
+.m-t-24 { margin-top: 24px; }
+.m-t-30 { margin-top: 30px; }
+.m-b-12 { margin-bottom: 12px; }
+.m-b-24 { margin-bottom: 24px; }
+.m-l-auto { margin-left: auto; }
+.m-r-8 { margin-right: 8px; }
+
+/* Texto */
+.text-center { text-align: center; }
+.text-primary { color: var(--icon-blue-600); }
+.text-success { color: var(--icon-green-600); }
+.text-warning { color: var(--icon-orange-600); }
+.text-error { color: var(--icon-red-600); }
+.text-decoration-none { text-decoration: none; }
+
+/* Tamaños de fuente */
+.f-s-14 { font-size: 14px; }
+.f-s-16 { font-size: 16px; }
+.f-s-30 { font-size: 30px; }
+.f-s-48 { font-size: 48px; }
+
+/* Peso de fuente */
+.f-w-500 { font-weight: 500; }
+.f-w-600 { font-weight: 600; }
+
+/* Display */
+.d-block { display: block; }
+.d-flex { display: flex; }
+
+/* Flexbox */
+.align-items-center { align-items: center; }
+.justify-content-center { justify-content: center; }
+.flex-1 { flex: 1; }
+
+/* Ancho */
+.w-100 { width: 100%; }
+
+/* Gap para flexbox */
+.gap-16 { gap: 16px; }
+
+/* Line height */
+.lh-lg { line-height: 1.5; }
+
+/* ========== EFECTOS ESPECIALES ========== */
+.efecto-color-title {
+  background: linear-gradient(45deg, var(--icon-blue-600), var(--icon-purple-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* ========== ACCESIBILIDAD ========== */
+/* Mejoras para lectores de pantalla */
+[role="alert"] {
+  live: polite;
+}
+
+/* Focus visible mejorado */
+.mat-mdc-button:focus-visible,
+.mat-mdc-form-field:focus-visible,
+.mat-mdc-checkbox:focus-visible {
+  outline: 2px solid var(--icon-blue-600);
+  outline-offset: 2px;
+}
+
+/* Estados hover para enlaces */
+a:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+/* Estados de carga */
+.loading-state {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ========== ESTILOS PARA FORTALEZA DE CONTRASEÑA ========== */
+.password-strength {
+  font-size: 12px;
+  margin-top: 4px;
+  display: block !important; /* Asegurar que se muestre como bloque */
+  
+  .text-success {
+    display: inline-flex;
+    align-items: center;
+    color: #2e7d32;
+    font-weight: 500;
+    
+    &::before {
+      content: '✓';
+      margin-right: 4px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+  
+  .text-warning {
+    display: inline-flex;
+    align-items: center;
+    color: #ef6c00;
+    font-weight: 500;
+    
+    &::before {
+      content: '⚠';
+      margin-right: 4px;
+      font-size: 14px;
+    }
+  }
+}
+
+/* Ajuste específico para mat-hint dentro de mat-form-field */
+.mat-mdc-form-field {
+  .mat-mdc-form-field-hint-wrapper {
+    .password-strength {
+      margin-top: 6px;
+      padding-left: 12px; /* Alineado con el contenido del input */
+      
+      .text-success,
+      .text-warning {
+        font-size: 12px;
+        line-height: 1.2;
+      }
+    }
+  }
+}
+
+/* ========== ESTILOS PARA CAMPOS CON ERRORES ========== */
+.mat-form-field.mat-form-field-invalid {
+  .mat-form-field-outline-thick {
+    color: var(--icon-red-600) !important;
+  }
+  
+  .mat-form-field-label {
+    color: var(--icon-red-600) !important;
+  }
+  
+  .mat-form-field-outline {
+    color: var(--icon-red-600) !important;
+  }
+}
+
+/* ========== ESTILOS PARA BOTONES DE CARGA ========== */
+.mat-mdc-button {
+  &:disabled {
+    opacity: 0.6;
+  }
+  
+  .mat-spinner {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Botones con iconos */
+  mat-icon {
+    margin-right: 8px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    vertical-align: middle;
+  }
+  
+  /* Ajustes específicos para botones con texto e icono */
+  &.mat-mdc-raised-button,
+  &.mat-mdc-unelevated-button,
+  &.mat-mdc-outlined-button {
+    mat-icon:first-child {
+      margin-right: 8px;
+      margin-left: -4px;
+    }
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .gap-16 {
+    gap: 12px;
+  }
+  
+  .d-flex {
+    &.responsive-column {
+      flex-direction: column;
+      
+      .flex-1 {
+        width: 100%;
+        margin-bottom: 8px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  
+  .f-s-30 {
+    font-size: 24px;
+  }
+  
+  .f-s-48 {
+    font-size: 36px;
+  }
+  
+  /* Mejoras para alertas en móviles */
+  .alert {
+    margin-left: 16px;
+    margin-right: 16px;
+    max-width: calc(100% - 32px);
+    padding: 10px 14px;
+    font-size: 13px;
+    
+    .error-message {
+      .error-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+      }
+    }
+  }
+  
+  /* Ajustes para el contenedor del formulario */
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .col-lg-12 {
+    max-width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .alert {
+    margin-left: 8px;
+    margin-right: 8px;
+    max-width: calc(100% - 16px);
+    padding: 8px 12px;
+    border-left-width: 3px;
+  }
+  
+  .efecto-color-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  /* Ajustar el indicador de fortaleza de contraseña en móviles */
+  .mat-mdc-form-field {
+    .mat-mdc-form-field-hint-wrapper {
+      .password-strength {
+        padding-left: 8px;
+        font-size: 11px;
+        
+        .text-success,
+        .text-warning {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}
+
+/* ========== ESTILOS PARA SNACKBAR ========== */
+/* Snackbar de éxito */
+.snackbar-success {
+  .mdc-snackbar__surface {
+    background-color: var(--icon-green-600) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(67, 160, 71, 0.3) !important;
+  }
+  
+  .mat-mdc-snack-bar-action {
+    color: white !important;
+    font-weight: 500 !important;
+  }
+  
+  .mat-mdc-button:not(:disabled) {
+    color: white !important;
+  }
+}
+
+/* Snackbar de error */
+.snackbar-error {
+  .mdc-snackbar__surface {
+    background-color: var(--icon-red-600) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3) !important;
+  }
+  
+  .mat-mdc-snack-bar-action {
+    color: white !important;
+    font-weight: 500 !important;
+  }
+  
+  .mat-mdc-button:not(:disabled) {
+    color: white !important;
+  }
+}
+
+/* Snackbar de información */
+.snackbar-info {
+  .mdc-snackbar__surface {
+    background-color: var(--icon-blue-600) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3) !important;
+  }
+  
+  .mat-mdc-snack-bar-action {
+    color: white !important;
+    font-weight: 500 !important;
+  }
+  
+  .mat-mdc-button:not(:disabled) {
+    color: white !important;
+  }
+}
+
+/* Estilos generales para todos los snackbars */
+.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    border-radius: 8px !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    padding: 16px 24px !important;
+    min-width: 300px !important;
+    max-width: 500px !important;
+  }
+  
+  .mat-mdc-snack-bar-action {
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+    margin-left: 12px !important;
+  }
+}

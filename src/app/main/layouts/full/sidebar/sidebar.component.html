@@ -1,0 +1,35 @@
+<div class="demo-container" [class.mobile]="isMobile">
+  <div class="sidebar-overlay" 
+       *ngIf="isMobile && !isCollapsed" 
+       (click)="onOverlayClick()">
+  </div>
+  <app-sidebar-ui
+    #sidebar
+    [items]="menuItems"
+    [collapsed]="isCollapsed"
+    (toggle)="toggleSidebar()"
+    (itemSelected)="onItemSelected($event)"
+  ></app-sidebar-ui>
+  <main class="main-content">
+    <h1>Sidebar Demo</h1>
+    <p>Click the arrow button to toggle the sidebar.</p>
+    
+    @if (selectedItem) {
+      <div class="selected-item">
+        <h2>Selected Item:</h2>
+        <div class="item-details">
+          <p><strong>Title:</strong> {{ selectedItem.title }}</p>
+          @if (selectedItem.path) {
+            <p><strong>Path:</strong> {{ selectedItem.path }}</p>
+          }
+          @if (selectedItem.badge) {
+            <p><strong>Badge:</strong> {{ selectedItem.badge }}</p>
+          }
+          @if (selectedItem.isNew) {
+            <span class="badge-new">New</span>
+          }
+        </div>
+      </div>
+    }
+  </main>
+</div> 

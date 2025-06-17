@@ -1,0 +1,41 @@
+@if(pageInfo?.['title'] != 'Analytical' && 
+    pageInfo?.['title'] != 'Product Management'
+    ){
+  <!--<div class="bg-light-primary rounded p-y-15 p-x-24 m-b-15 overflow-hidden">-->
+    <div class="bg-light-primary rounded p-x-24 m-b-8 overflow-hidden" style="padding-top: 10px;"> <!--aqui-->
+      <div class="row">
+        <div class="col-sm-8" style="display: flex; align-items: baseline; padding-left: 12px;padding-top: 3px;">
+          <h4 class="page-title m-0 f-s-18 f-w-600 m-b-16">
+            {{ pageInfo?.['title'] }}
+          </h4>
+          
+            <ul class="breadcrumb" style="padding-left: 15px;">
+              @for (url of pageInfo?.['urls']; track url.url;let index = $index,last = $last ) { @if(!last){
+
+              <li class="breadcrumb-item" [routerLink]="url.url">
+                <a [routerLink]="url.url">
+                  <i-tabler name="arrow-back"class="icon-16"></i-tabler>
+                  {{ url.title }}
+                </a>
+              </li>
+              }@else {
+              <li class="breadcrumb-item">
+                <i-tabler name="circle-filled" class="icon-8" style="margin-top: 2px;"></i-tabler>
+              </li>
+              <li class="breadcrumb-item active f-s-14">{{ url.title }}</li>
+              } }
+            </ul>
+          
+        </div>
+        <div class="col-sm-4 text-right position-relative">
+          <div class="breadcrumb-icon">
+            <img
+              src="./assets/images/breadcrumb/ChatBc.png"
+              alt="breadcrumb"
+              width="85"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+}

@@ -1,0 +1,133 @@
+<app-loading *ngIf="loading" />
+<mat-card class="cardWithShadow">
+  <form [formGroup]="form" *ngIf="!loading">
+    <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="d-flex align-items-center">
+            <mat-icon class="d-flex align-items-center">
+              <i-tabler name="user-circle" class="icon-20 m-r-8 d-flex"></i-tabler>
+            </mat-icon>
+          </div>
+          Cuenta
+        </ng-template>
+        <mat-card-content class="card-form">
+          <div class="row">
+            <div class="col-sm-6">
+                  <mat-card-title>Cambiar Informarcion de Usuario</mat-card-title>
+                  <mat-card-subtitle class="f-s-14"> Cambia tu foto de perfil desde aquí</mat-card-subtitle>
+                  <div class="text-center m-t-24">
+                    <img src="./assets/images/profile/user-01.png" class="rounded-circle" width="120" />
+                    <div class="m-t-24">
+                      <button mat-flat-button color="primary" class="m-r-8">
+                        Subir
+                      </button>
+                      <button mat-stroked-button color="warn">Reset</button>
+                    </div>
+                    <span class="f-s-14 m-t-24 d-block">Formatos JPG, GIF or PNG. Max Tamaño de 800K</span>
+                  </div>
+
+                    <div class="col-lg-6 p-t-15">
+                        <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Rol</mat-label>
+                        <mat-form-field appearance="outline" class="w-50" color="primary">
+                          <mat-select name="satus" formControlName="role">
+                            <mat-option *ngFor="let item of listRole" [value]="item.name">{{ item.name }}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                      <div class="col-sm-6">
+                        <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Usuario Activo</mat-label>
+                        <mat-slide-toggle formControlName="isActive" color="primary" />
+                      </div>
+                  
+            </div>
+            <div class="col-sm-6">
+
+                  <mat-card-title>Datos Personales</mat-card-title>
+                  <mat-card-subtitle class="f-s-14">Para cambiar tus datos personales, edítalos y guárdalos desde
+                    aquí</mat-card-subtitle>
+
+                    <!-- input -->
+                    <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Nombres</mat-label>
+                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                      <input matInput type="text" formControlName="firstName" />
+                    </mat-form-field>
+
+                    <!-- input -->
+                    <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Apellidos</mat-label>
+                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                      <input matInput type="text" formControlName="lastName" />
+                    </mat-form-field>
+
+                    <!-- input -->
+                    <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Email</mat-label>
+                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                      <input matInput type="email" formControlName="email" />
+                    </mat-form-field>
+
+                    <!-- input -->
+                    <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Celular</mat-label>
+                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                      <input matInput type="text" formControlName="phoneNumber" />
+                    </mat-form-field>
+
+                    <!-- input -->
+                    <mat-label class="f-s-14 f-w-600 m-b-8 d-block">Compañia</mat-label>
+                    <mat-form-field appearance="outline" class="w-100" color="primary">
+                      <input matInput type="text" formControlName="userCompanyName" />
+                    </mat-form-field>
+
+            </div>
+            <div class="col-12">
+              <mat-card class="cardWithShadow">
+                <mat-card-content class="p-y-24">
+                  
+
+                 
+
+                 
+
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="d-flex align-items-center">
+            <mat-icon class="d-flex align-items-center">
+              <i-tabler name="bell" class="icon-20 m-r-8 d-flex"></i-tabler>
+            </mat-icon>
+          </div>
+          Notifications
+        </ng-template>
+        <mat-card-content class="p-y-24">
+          <div class="row justify-content-center">
+          </div>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="text-right p-24 p-t-0">
+      <button mat-flat-button class="m-r-8" (click)="onSave()">
+        <mat-icon class="d-flex align-items-center">
+          <i-tabler name="device-floppy" class="icon-20 m-r-8 d-flex"></i-tabler>
+        </mat-icon>
+        Guardar
+      </button>
+      <button mat-flat-button class="bg-error text-white" (click)="onCancel()">
+        <mat-icon class="d-flex align-items-center">
+          <i-tabler name="square-rounded-x" class="icon-20 m-r-8 d-flex"></i-tabler>
+        </mat-icon>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</mat-card>
+
+
+
+
+
+

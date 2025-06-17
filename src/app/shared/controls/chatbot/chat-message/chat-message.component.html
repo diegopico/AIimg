@@ -1,0 +1,15 @@
+<div class="chat-message" [ngClass]="message.sender">
+  <div class="avatar-container" *ngIf="message.sender === 'bot'">
+    <div class="avatar" [style.background-color]="primaryColor">{{ botInitial }}</div>
+  </div>
+  <div class="message-content">
+    
+    <div class="message-header" *ngIf="showHeaders">
+      <span class="sender-name">{{ message.sender === 'user' ? userName : botName }}</span>
+      <span class="timestamp">{{ message.timestamp | date:'shortTime' }}</span>
+    </div>
+    
+    <div class="message-text" [innerHTML]="formattedText"></div>
+    <div class="message-time">{{ message.timestamp | date:'h:mm a' }}</div>
+  </div>
+</div>

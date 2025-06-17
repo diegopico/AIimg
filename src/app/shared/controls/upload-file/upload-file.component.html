@@ -1,0 +1,87 @@
+<div class="upload-container">
+  <!-- Upload Section -->
+  <div class="upload-section">
+    <div class="file-drop-area" 
+         (click)="fileInput.click()"
+         (dragover)="onDragOver($event)"
+         (drop)="onDrop($event)"
+         [class.active]="previewUrls.length > 0">
+      <input type="file" 
+             #fileInput 
+             hidden 
+             multiple 
+             accept="image/*" 
+             (change)="onFileSelected($event)">
+      
+      <div class="drop-message" *ngIf="previewUrls.length === 0">
+        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+        <p>Click to select images or drag and drop files here</p>
+        <span class="file-info">Accepted files: JPG, PNG, GIF (Max {{maxFileSize}}MB)</span>
+      </div>
+      
+      <!-- Preview Images -->
+      <div class="preview-container" *ngIf="previewUrls.length > 0">
+        <div class="image-preview" *ngFor="let url of previewUrls; let i = index">
+          <div class="preview-wrapper">
+            <img [src]="url" alt="Preview" (error)="onImgError($event)">
+            <button mat-icon-button class="remove-btn" (click)="removeImage(i); $event.stopPropagation()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <span class="file-name">{{selectedFiles[i].name || ''}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Button and Progress -->
+    <div class="upload-actions" *ngIf="previewUrls.length > 0">
+      <button mat-raised-button color="primary" 
+              [disabled]="isUploading" 
+              (click)="uploadFiles()">
+        <mat-icon>upload</mat-icon>
+        Upload {{previewUrls.length}} Files
+      </button>
+      <button mat-button 
+              [disabled]="isUploading" 
+              (click)="previewUrls = []; selectedFiles = []">
+        Cancel
+      </button>
+    </div>
+
+    <mat-progress-bar *ngIf="isUploading" 
+                      mode="determinate" 
+                      [value]="uploadProgress">
+    </mat-progress-bar>
+  </div>
+
+  <!-- Uploaded Images Gallery -->
+  <div class="gallery-container" *ngIf="allImages && allImages.length > 0">
+    <h3>Imagenes subidas</h3>
+    <div class="gallery">
+      <div class="gallery-item" *ngFor="let image of allImages; let i = index">
+        <mat-card style="padding: 6px; margin-bottom: -15px;" class="b-1">
+          <div style="position: relative;">
+            <img mat-card-image [src]="image.url || '/assets/images/nofound.png'" [alt]="image.fileName" (error)="onImgError($event)" (click)="openImageViewer(image.url)">
+            <button mat-icon-button class="zoom-btn" (click)="openImageViewer(image.url); $event.stopPropagation()" style="position: absolute; top: 8px; right: 8px; background: rgba(34,34,34,0.7); color: #fff;">
+              <mat-icon>zoom_in</mat-icon>
+            </button>
+          </div>
+          <mat-card-content>
+            <p class="image-title">{{image.fileName}}</p>
+            <p class="upload-date">{{image.uploadDate | date}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <!--
+            <button mat-icon-button color="primary" (click)="copyToClipboard(image.url)">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            -->
+            <button mat-icon-button color="warn" (click)="deleteUploadedImage(image, i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,375 @@
+/* === ESTILOS MODERNOS PARA TABLAS MARKDOWN === */
+
+// Variables para tema claro
+:root {
+  --md-table-bg: rgba(255, 255, 255, 0.95);
+  --md-table-border: rgba(0, 0, 0, 0.1);
+  --md-table-header-bg: rgba(248, 249, 250, 0.95);
+  --md-table-header-text: #2d3748;
+  --md-table-text: #4a5568;
+  --md-table-hover: rgba(66, 153, 225, 0.1);
+  --md-table-stripe-odd: rgba(255, 255, 255, 0.8);
+  --md-table-stripe-even: rgba(247, 250, 252, 0.8);
+  --md-table-shadow: rgba(0, 0, 0, 0.1);
+  --md-table-numeric: #2b6cb0;
+  --md-table-totals-bg: rgba(59, 130, 246, 0.1);
+  --md-table-totals-border: rgba(59, 130, 246, 0.3);
+  // Variables para resize
+  --md-table-resize-handle: rgba(59, 130, 246, 0.4);
+  --md-table-resize-handle-hover: rgba(59, 130, 246, 0.6);
+  --md-table-resize-handle-active: rgba(59, 130, 246, 0.8);
+  --md-table-resize-bg-hover: rgba(59, 130, 246, 0.1);
+  --md-table-resize-bg-active: rgba(59, 130, 246, 0.2);
+}
+
+// Variables para tema oscuro
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-table-bg: rgba(26, 32, 44, 0.95);
+    --md-table-border: rgba(255, 255, 255, 0.1);
+    --md-table-header-bg: rgba(45, 55, 72, 0.95);
+    --md-table-header-text: #e2e8f0;
+    --md-table-text: #cbd5e0;
+    --md-table-hover: rgba(66, 153, 225, 0.2);
+    --md-table-stripe-odd: rgba(26, 32, 44, 0.8);
+    --md-table-stripe-even: rgba(45, 55, 72, 0.5);
+    --md-table-shadow: rgba(0, 0, 0, 0.3);
+    --md-table-numeric: #63b3ed;
+    --md-table-totals-bg: rgba(59, 130, 246, 0.2);
+    --md-table-totals-border: rgba(59, 130, 246, 0.4);
+    // Variables para resize en tema oscuro
+    --md-table-resize-handle: rgba(99, 179, 237, 0.5);
+    --md-table-resize-handle-hover: rgba(99, 179, 237, 0.7);
+    --md-table-resize-handle-active: rgba(99, 179, 237, 0.9);
+    --md-table-resize-bg-hover: rgba(99, 179, 237, 0.15);
+    --md-table-resize-bg-active: rgba(99, 179, 237, 0.25);
+  }
+}
+
+// Contenedor responsivo con scroll horizontal
+.markdown-table-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px var(--md-table-shadow);
+  background: var(--md-table-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--md-table-border);
+  transition: all 0.3s ease;
+  animation: tableSlideIn 0.6s ease-out;
+
+  &:hover {
+    box-shadow: 0 8px 25px -5px var(--md-table-shadow);
+    transform: translateY(-1px);
+  }
+}
+
+// Tabla principal
+.markdown-table {
+  // CAMBIO PRINCIPAL: permite que la tabla crezca horizontalmente
+  width: auto;
+  min-width: 100%;
+  max-width: auto;
+
+  border-collapse: collapse;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  
+  // AJUSTE: ancho mínimo inicial más flexible
+  min-width: max(500px, 100%);
+
+  // Encabezado de la tabla
+  thead {
+    background: var(--md-table-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    th {
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--md-table-header-text);
+      border-bottom: 2px solid var(--md-table-border);
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      position: relative;
+      
+      // IMPORTANTE: permite que las columnas mantengan su ancho personalizado
+      box-sizing: border-box;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  // Cuerpo de la tabla
+  tbody {
+    tr {
+      transition: all 0.2s ease;
+      border-bottom: 1px solid var(--md-table-border);
+      position: relative;
+
+      // Filas impares (1, 3, 5, etc.)
+      &:nth-child(odd) {
+        background: var(--md-table-stripe-odd);
+      }
+
+      // Filas pares (2, 4, 6, etc.)
+      &:nth-child(even) {
+        background: var(--md-table-stripe-even);
+      }
+
+      &:hover {
+        background: var(--md-table-hover) !important;
+        transform: scale(1.01);
+        box-shadow: 0 2px 8px var(--md-table-shadow);
+        z-index: 5;
+        position: relative;
+      }
+
+      // Fila de totales especial
+      &.totals-row {
+        background: var(--md-table-totals-bg) !important;
+        border-top: 2px solid var(--md-table-totals-border) !important;
+        font-weight: 700;
+
+        &:hover {
+          background: var(--md-table-totals-bg) !important;
+          transform: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
+
+    td {
+      padding: 0.65rem 0.75rem;
+      color: var(--md-table-text);
+      vertical-align: middle;
+      border-right: 1px solid var(--md-table-border);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      
+      // CAMBIO: permite que las celdas se expandan
+      max-width: none;
+      min-width: 80px;
+      box-sizing: border-box;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      // Celdas numéricas y monetarias
+      &.numeric-cell {
+        text-align: right;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        font-weight: 600;
+        color: var(--md-table-numeric);
+        background: linear-gradient(135deg, transparent 0%, rgba(66, 153, 225, 0.05) 100%);
+      }
+
+      // Estilos específicos para totales
+      &.totals-label {
+        color: var(--md-table-numeric) !important;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      &.totals-value {
+        color: var(--md-table-numeric) !important;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      &.totals-empty {
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+/* === ESTILOS PARA REDIMENSIONAMIENTO DE COLUMNAS === */
+
+// Tablas redimensionables
+.resizable-table {
+  // MEJORA: asegurar que la tabla pueda expandirse
+  table-layout: auto;
+  
+  th {
+    position: relative;
+    min-width: 80px;
+    overflow: visible;
+    
+    // IMPORTANTE: permite ancho personalizado
+    width: auto;
+    
+    // MEJORA: suavizar transiciones de ancho
+    transition: width 0.1s ease-out;
+  }
+
+  // Estado durante resize activo
+  &.resizing {
+    user-select: none;
+    
+    // MEJORA: desactivar transiciones durante resize activo
+    th {
+      transition: none;
+    }
+    
+    .column-resize-handle {
+      background: var(--md-table-resize-bg-active);
+      border-right-color: var(--md-table-resize-handle-active);
+      opacity: 1;
+    }
+
+    tbody tr:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Contenedor del contenido del header
+.th-content {
+  padding-right: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  // MEJORA: mejor manejo del espacio
+  min-width: 0;
+}
+
+// Handle de resize de columnas
+.column-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  border-right: 2px solid transparent;
+  transition: all 0.2s ease;
+  z-index: 20;
+  opacity: 0;
+
+  // Estados de interacción
+  &:hover {
+    background: var(--md-table-resize-bg-hover);
+    border-right-color: var(--md-table-resize-handle-hover);
+    opacity: 1;
+  }
+
+  &:active {
+    background: var(--md-table-resize-bg-active);
+    border-right-color: var(--md-table-resize-handle-active);
+    opacity: 1;
+  }
+}
+
+// Mostrar handles en hover del header
+.resizable-table th:hover .column-resize-handle {
+  opacity: 0.7;
+}
+
+/* === FIN ESTILOS REDIMENSIONAMIENTO === */
+
+// Clases de alineación
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Responsividad para móviles
+@media (max-width: 768px) {
+  .markdown-table-container {
+    margin: 1rem -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .markdown-table {
+    font-size: 0.8rem;
+    // AJUSTE móvil: ancho mínimo más pequeño
+    min-width: max(400px, 100%);
+
+    thead th,
+    tbody td {
+      padding: 0.49rem 0.5rem;
+      // CAMBIO: remover max-width fijo en móviles
+      max-width: none;
+      min-width: 60px;
+    }
+  }
+
+  // Ajustes para resize en móviles
+  .column-resize-handle {
+    width: 8px;
+    border-right-width: 3px;
+    opacity: 0.8; // Más visible en móviles
+  }
+
+  .resizable-table th:hover .column-resize-handle {
+    opacity: 1;
+  }
+}
+
+// Responsividad para tablets
+@media (max-width: 1024px) and (min-width: 769px) {
+  .column-resize-handle {
+    width: 7px;
+    opacity: 0.6; // Visible intermedio en tablets
+  }
+  
+  .markdown-table {
+    // AJUSTE tablet: ancho mínimo intermedio
+    min-width: max(450px, 100%);
+  }
+}
+
+// Animaciones
+@keyframes tableSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Animación para handles de resize
+@keyframes resizeHandleAppear {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.column-resize-handle {
+  animation: resizeHandleAppear 0.2s ease-out;
+}
+
+/* === FIN DE ESTILOS PARA TABLAS MARKDOWN === */

@@ -1,0 +1,60 @@
+/* Estilos para el menú móvil con mat-menu */
+.mobile-dropdown {
+  min-width: 280px !important;
+  max-width: 320px !important;
+}
+
+.mobile-menu-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mobile-nav-item {
+  height: 48px !important;
+  line-height: 48px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+.mobile-nav-item:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Estilos para tema oscuro */
+.dark-theme .mobile-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark-theme .mobile-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Estilos para los botones de acción en el menú móvil */
+.mobile-dropdown .mat-flat-button {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  height: 40px !important;
+}
+
+/* Responsivo adicional para asegurar que funcione en todos los tamaños */
+@media (max-width: 991px) {
+  .topbar {
+    flex-wrap: nowrap;
+  }
+  
+  .d-lg-none {
+    display: block !important;
+  }
+  
+  .d-none.d-lg-flex {
+    display: none !important;
+  }
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.mobile-dropdown .mat-menu-content {
+  padding: 0 !important;
+}
+
+.mobile-dropdown .mat-divider {
+  margin: 8px 0 !important;
+}
