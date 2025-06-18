@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from './../../../environments/environment.development';
+//import { environment } from './../../../environments/environment.development';
+import { environment } from 'src/environments/environment.prod';
 import { User } from '../models/user';
 import { IResponse } from 'src/app/shared/wrappers/response';
 

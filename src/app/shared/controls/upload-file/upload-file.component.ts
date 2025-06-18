@@ -11,7 +11,8 @@ import { UploadLogicalService } from './upload-logical.service';
 import { forkJoin } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ImagenViewerComponent } from './imagen-viewer';
-import { environment } from 'src/environments/environment.development';
+//import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment.prod';
 
 export interface UploadedImage {
   id: string;
@@ -75,10 +76,10 @@ export class UploadFileComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
+    this.UploadLogical.setPathUrl(this.apiLogical);
+    this.uploadFisical.setPathUrl(this.apiFisical);
     if (changes['entityId'] && this.entityId && (!this.productIds || this.productIds.length === 0)) {
       this.uploadedImages = [];
-      this.UploadLogical.setPathUrl(this.apiLogical);
-      this.uploadFisical.setPathUrl(this.apiFisical);
       this.loadImagesForEntity(this.entityId);
     }
     if (changes['images']) {

@@ -476,3 +476,10 @@
     }
   }
 }
+
+::ng-deep html .mdc-checkbox__background {
+  border-radius: 4px;
+  width: 21px;
+  height: 21px;
+  border: 1px solid #687a83;
+}

@@ -2,7 +2,8 @@ import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IResponse } from '../wrappers/response';
-import { environment } from './../../../environments/environment.development';
+//import { environment } from './../../../environments/environment.development';
+import { environment } from 'src/environments/environment.prod';
 
 import { IAuthResponse } from './../models/auth-response';
 import { IAuthRequest } from './../models/auth-request';

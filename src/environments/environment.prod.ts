@@ -18,10 +18,10 @@ export const environment = {
   baseApiUrl: 'https://api.aisolutionshub.ec/api',
   socketUrl: 'https://api.aisolutionshub.ec/socket.io',
   */
-  baseApiUrl:     'http://157.100.250.13:8001/api',
+  //baseApiUrl:     'http://157.100.250.13:8001/api',
   basePathUrl:    'http://157.100.250.13:8001/api',
   apiUrlPHP: `${document.getElementsByTagName('base')[0].href}/assets/php`, // 'http://
-  apiEndpoint:    'api/products/images', // Este endpoint Base Sql Server 
+  //apiEndpoint:    'api/products/images', // Este endpoint Base Sql Server 
 
   defaultUsername: 'guest',
   guesUserPassword: '123456',

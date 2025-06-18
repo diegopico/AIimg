@@ -2,7 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadedImage } from './upload-file.component';
-import { environment } from '../../../../environments/environment.development';
+//import { environment } from '../../../../environments/environment.development';
+import { environment } from 'src/environments/environment.prod';
 import { IResponse, IResponse3 } from 'src/app/shared/wrappers/response';
 
 

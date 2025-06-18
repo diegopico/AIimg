@@ -24,7 +24,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { finalize, forkJoin, of, tap } from 'rxjs';
 import { WaitService } from 'src/app/shared/controls/wait/wait.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-upload-file-prod',

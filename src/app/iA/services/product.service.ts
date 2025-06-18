@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from './../../../environments/environment.development';
+//import { environment } from './../../../environments/environment.development';
+import { environment } from 'src/environments/environment.prod';
 import { IResponse, IResponse3 } from 'src/app/shared/wrappers/response';
 import { IPagedResult ,IPagedResult2} from 'src/app/shared/wrappers/pagedResult';
 import { UploadedImage } from 'src/app/shared/controls/upload-file/upload-file.component';
